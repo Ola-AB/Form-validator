@@ -58,6 +58,23 @@ checkMail = (email) => {
 	}
 };
 
+const checkErrors = () => {
+	allInputs = document.querySelectorAll('.form-box');
+	let errorCount = 0;
+
+	allInputs.forEach(el => {
+		if(el.classList.contains('error')) {
+			errorCount++;
+		}
+	})
+
+	if(errorCount === 0) {
+		popup.classList.add('show-popup')
+	}
+	console.log(errorCount);
+}
+
+
 sendBtn.addEventListener("click", (e) => {
 	e.preventDefault();
 
@@ -66,6 +83,7 @@ sendBtn.addEventListener("click", (e) => {
 	checkLength(pass, 8);
 	checkPassword(pass, pass2);
 	checkMail(email);
+	checkErrors()
 });
 
 clearBtn.addEventListener("click", (e) => {
@@ -73,5 +91,6 @@ clearBtn.addEventListener("click", (e) => {
 
 	[username, pass, pass2, email].forEach((el) => {
 		el.value = "";
+		clearError(el)
 	});
 });
